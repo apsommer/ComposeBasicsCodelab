@@ -14,9 +14,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sommerengineering.composebasicscodelab.ui.theme.BasicComposeTheme
+import com.sommerengineering.composebasicscodelab.ui.theme.Purple80
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +33,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp(modifier: Modifier = Modifier) {
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Greeting("Android")
+fun MyApp(
+    modifier: Modifier = Modifier,
+    names: List<String> = listOf("World", "Compose")
+) {
+    Column(modifier = modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name = name)
+        }
     }
 }
 
@@ -45,15 +49,19 @@ fun Greeting(
     name: String,
     modifier: Modifier = Modifier) {
 
-    Surface(color = MaterialTheme.colorScheme.primary) {
-        Column(modifier = modifier.fillMaxSize().padding(24.dp)) {
-            Text(text = "Hello")
-            Text(text = "$name!")
+    Surface(
+        color = Purple80,
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Column(
+            modifier = modifier.fillMaxWidth().padding(24.dp)) {
+            Text(color = Color.White, text = "Hello")
+            Text(color = Color.White, text = "$name!")
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GreetingPreview() {
     BasicComposeTheme {

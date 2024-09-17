@@ -20,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -109,34 +111,30 @@ fun Greeting(
     // similar to private class variable
     var isExpanded by rememberSaveable { mutableStateOf(false) }
 
-    // returns State with value updated during animation
-    val extraPadding by animateDpAsState(
-        if (isExpanded) 48.dp else 0.dp,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow),
-        label = stringResource(R.string.spring_animation))
+    Card (
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primary),
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
 
-    Surface(
-        color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp))
-    {
         Row(
             modifier = modifier
-                .padding(24.dp)
-                .animateContentSize()) {
+                .padding(12.dp)
+                .animateContentSize(animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioMediumBouncy,
+                    stiffness = Spring.StiffnessLow))) {
 
             Column(
-                modifier = modifier.weight(1f)) {
+                modifier = modifier
+                    .weight(1f)
+                    .padding(12.dp)) {
                 Text(text = stringResource(R.string.hello))
                 Text(
                     text = name,
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold))
-                Text(
-                    text =
-                        if (isExpanded) stringResource(R.string.lorem_ipsum)
-                        else "")
+                if (isExpanded) {
+                    Text(text = stringResource(R.string.lorem_ipsum))
+                }
             }
 
             IconButton(

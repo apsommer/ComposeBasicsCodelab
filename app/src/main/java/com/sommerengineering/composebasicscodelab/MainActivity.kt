@@ -100,7 +100,7 @@ fun Greeting(
 
     // remember protects against recomposition
     // similar to private class variable
-    var isExpanded by remember { mutableStateOf(false) }
+    var isExpanded by rememberSaveable { mutableStateOf(false) }
     val extraPadding = if (isExpanded) 48.dp else 0.dp
 
     Surface(

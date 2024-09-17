@@ -107,35 +107,33 @@ fun Greeting(
         if (isExpanded) 48.dp else 0.dp,
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        )
-    )
+            stiffness = Spring.StiffnessLow),
+        label = "springAnimation")
 
     Surface(
         color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-    ) {
-        Row(modifier = modifier.padding(24.dp)) {
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp))
+    {
+        Row(
+            modifier = modifier.padding(24.dp)) {
+
             Column(
                 modifier = modifier
                     .weight(1f)
-                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))
-            ) {
+                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))) {
+
                 Text(text = "Hello")
                 Text(
                     text = name,
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.ExtraBold
-                    )
-                )
+                        fontWeight = FontWeight.ExtraBold))
             }
+
             ElevatedButton(
-                onClick = { isExpanded = !isExpanded}
-            ) {
-                Text(
-                    if (isExpanded) "Show less"
-                    else "Show more"
-                )
+                onClick = { isExpanded = !isExpanded}) {
+                    Text(
+                        if (isExpanded) "Show less"
+                        else "Show more")
             }
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -121,18 +122,21 @@ fun Greeting(
         modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp))
     {
         Row(
-            modifier = modifier.padding(24.dp)) {
+            modifier = modifier
+                .padding(24.dp)
+                .animateContentSize()) {
 
             Column(
-                modifier = modifier
-                    .weight(1f)
-                    .padding(bottom = extraPadding.coerceAtLeast(0.dp))) {
-
+                modifier = modifier.weight(1f)) {
                 Text(text = stringResource(R.string.hello))
                 Text(
                     text = name,
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold))
+                Text(
+                    text =
+                        if (isExpanded) stringResource(R.string.lorem_ipsum)
+                        else "")
             }
 
             IconButton(

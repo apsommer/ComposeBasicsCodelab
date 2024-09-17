@@ -54,15 +54,20 @@ fun Greeting(
     modifier: Modifier = Modifier) {
 
     // remember protects against recomposition
-    // similiar to private class variable
+    // similar to private class variable
     val isExpanded = remember { mutableStateOf(false) }
+    val extraPadding = if (isExpanded.value) 48.dp else 0.dp
 
     Surface(
         color = Purple80,
         modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = modifier.padding(24.dp)) {
-            Column(modifier = modifier.weight(1f)) {
+            Column(
+                modifier = modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+            ) {
                 Text(color = Color.White, text = "Hello")
                 Text(color = Color.White, text = "$name!")
             }

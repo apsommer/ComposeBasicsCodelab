@@ -42,6 +42,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun MyApp(modifier: Modifier = Modifier) {
+
+    // hoist state
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
+
+    Surface(modifier) {
+        if (shouldShowOnboarding) {
+            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
+        } else {
+            Greetings()
+        }
+    }
+}
+
+@Composable
 fun OnboardingScreen(
     onContinueClicked: () -> Unit,
     modifier: Modifier = Modifier) {
@@ -61,20 +76,6 @@ fun OnboardingScreen(
     }
 }
 
-@Composable
-fun MyApp(modifier: Modifier = Modifier) {
-
-    // hoist state
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
-
-    Surface(modifier) {
-        if (shouldShowOnboarding) {
-            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
-        } else {
-            Greetings()
-        }
-    }
-}
 
 @Composable
 fun Greetings(
@@ -95,8 +96,8 @@ fun Greeting(
 
     // remember protects against recomposition
     // similar to private class variable
-    val isExpanded = remember { mutableStateOf(false) }
-    val extraPadding = if (isExpanded.value) 48.dp else 0.dp
+    var isExpanded by remember { mutableStateOf(false) }
+    val extraPadding = if (isExpanded) 48.dp else 0.dp
 
     Surface(
         color = Purple80,
@@ -112,10 +113,10 @@ fun Greeting(
                 Text(color = Color.White, text = "$name!")
             }
             ElevatedButton(
-                onClick = { isExpanded.value = !isExpanded.value}
+                onClick = { isExpanded = !isExpanded}
             ) {
                 Text(
-                    if (isExpanded.value) "Show less"
+                    if (isExpanded) "Show less"
                     else "Show more"
                 )
             }

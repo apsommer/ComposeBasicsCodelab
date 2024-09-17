@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ExpandLess
+import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
@@ -29,6 +32,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.coerceAtLeast
@@ -110,7 +114,7 @@ fun Greeting(
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessLow),
-        label = "springAnimation")
+        label = stringResource(R.string.spring_animation))
 
     Surface(
         color = MaterialTheme.colorScheme.primary,
@@ -124,17 +128,24 @@ fun Greeting(
                     .weight(1f)
                     .padding(bottom = extraPadding.coerceAtLeast(0.dp))) {
 
-                Text(text = "Hello")
+                Text(text = stringResource(R.string.hello))
                 Text(
                     text = name,
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold))
             }
 
-//            IconButton(
-//                onClick = { isExpanded = !isExpanded }) {
-//                Icon()
-//            }
+            IconButton(
+                onClick = { isExpanded = !isExpanded }) {
+                Icon(
+                    imageVector =
+                        if (isExpanded) Icons.Filled.ExpandLess
+                        else Icons.Filled.ExpandMore,
+                    contentDescription =
+                        if (isExpanded) stringResource(R.string.show_less)
+                        else stringResource(R.string.show_more),
+                    modifier = modifier.padding(8.dp))
+            }
         }
     }
 }

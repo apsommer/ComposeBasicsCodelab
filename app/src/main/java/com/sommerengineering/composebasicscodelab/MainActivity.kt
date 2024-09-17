@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -129,12 +131,10 @@ fun Greeting(
                         fontWeight = FontWeight.ExtraBold))
             }
 
-            ElevatedButton(
-                onClick = { isExpanded = !isExpanded}) {
-                    Text(
-                        if (isExpanded) "Show less"
-                        else "Show more")
-            }
+//            IconButton(
+//                onClick = { isExpanded = !isExpanded }) {
+//                Icon()
+//            }
         }
     }
 }
